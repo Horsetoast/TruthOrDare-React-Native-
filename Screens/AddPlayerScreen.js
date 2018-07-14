@@ -37,8 +37,9 @@ export default class PlayersScreen extends React.Component {
       playerName: "",
       playerGender: "M"
     });
-    Keyboard.dismiss();
-    this.props.navigation.navigate("Players");
+    Keyboard.dismiss().then(() => {
+      this.props.navigation.navigate("Players");
+    });
   }
 
   setGender(gender) {
@@ -72,7 +73,6 @@ export default class PlayersScreen extends React.Component {
         </Text>
         <TextInput
           maxLength={30}
-          placeholder="Write your name"
           placeholderTextColor={styles.colors.primaryLight}
           underlineColorAndroid="transparent"
           style={{

@@ -1,0 +1,8 @@
+{
+  "eslint.autoFixOnSave": false,
+  "eslint.packageManager": "yarn",
+  "eslint.enable": false,
+  "editor.formatOnSave": true,
+  "javascript.format.enable": true,
+  "prettier.eslintIntegration": true
+}

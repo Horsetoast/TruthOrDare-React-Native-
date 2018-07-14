@@ -202,7 +202,15 @@ export default class PlayersScreen extends React.Component {
                     flexDirection: "row"
                   }}
                 >
-                  <TouchableOpacity onPress={() => this.removePlayer(i)}>
+                  <TouchableOpacity
+                    style={{
+                      width: 30,
+                      height: 30,
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                    onPress={() => this.removePlayer(i)}
+                  >
                     <SvgUri
                       width="10"
                       height="10"

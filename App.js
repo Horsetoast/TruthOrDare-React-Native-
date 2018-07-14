@@ -8,37 +8,59 @@ import DrawScreen from "./Screens/DrawScreen.js";
 // import cacheAssetsAsync from "./cachedAssetsAsync";
 import styles from "./styles";
 import { StackNavigator } from "react-navigation";
-// import { Font } from "expo";
+import { Animated, Easing } from "react-native";
 
 // Disable yellow warnings
 console.disableYellowBox = true;
 
-const RootStack = StackNavigator({
-  GameMode: {
-    screen: GameModeScreen,
-    navigationOptions: navigation => ({
-      header: null
-    })
+const RootStack = StackNavigator(
+  {
+    GameMode: {
+      screen: GameModeScreen
+    },
+    Players: {
+      screen: PlayersScreen
+    },
+    AddPlayer: {
+      screen: AddPlayerScreen
+    },
+    Draw: {
+      screen: DrawScreen
+    }
   },
-  Players: {
-    screen: PlayersScreen,
-    navigationOptions: navigation => ({
-      header: null
-    })
-  },
-  AddPlayer: {
-    screen: AddPlayerScreen,
-    navigationOptions: navigation => ({
-      header: null
-    })
-  },
-  Draw: {
-    screen: DrawScreen,
-    navigationOptions: navigation => ({
-      header: null
-    })
+  {
+    headerMode: "none",
+    animationEnabled: false,
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 300,
+        easing: Easing.out(Easing.poly(2)),
+        timing: Animated.timing,
+        useNativeDriver: true
+      },
+      screenInterpolator: sceneProps => {
+        const { layout, position, scene } = sceneProps;
+        const { index } = scene;
+
+        const height = layout.initHeight;
+        const translateX = position.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [height, 0, 0]
+        });
+
+        const opacity = position.interpolate({
+          inputRange: [index - 1, index - 0.99, index],
+          outputRange: [0, 1, 1]
+        });
+
+        return { opacity, transform: [{ translateX }] };
+      }
+    }),
+    navigationOptions: {
+      gesturesEnabled: false
+    }
   }
-});
+);
 
 export default class App extends React.Component {
   constructor(props) {
@@ -68,31 +90,24 @@ export default class App extends React.Component {
     };
   }
 
-  // async _loadAssetsAsync() {
-  //   try {
-  //     await cacheAssetsAsync({
-  //       images: [
-  //         styles.images.bcgPattern,
-  //         styles.images.modeParty,
-  //         styles.images.modeRaunchy,
-  //         styles.svg.iconMale,
-  //         styles.svg.iconFemale,
-  //         styles.svg.iconTimes
-  //       ]
-  //     });
-  //   } catch (e) {
-  //     console.log({
-  //       e
-  //     });
-  //   } finally {
-  //     this.setState({
-  //       appIsReady: true
-  //     });
-  //   }
-  // }
+  async _loadAssetsAsync() {
+    try {
+      // styles.images.forEach(img => {
+      // })
+    } catch (e) {
+      console.log({
+        e
+      });
+    } finally {
+      this.setState({
+        fontLoaded: true,
+        appIsReady: true
+      });
+    }
+  }
 
   componentDidMount() {
-    // this._loadAssetsAsync();
+    this._loadAssetsAsync();
     // Font.loadAsync({
     //   "titilium-regular": require("./assets/fonts/TitilliumWeb-Regular.ttf")
     // }).then(() => {
@@ -101,10 +116,10 @@ export default class App extends React.Component {
     //   });
     // });
 
-    this.setState({
-      fontLoaded: true,
-      appIsReady: true
-    });
+    // this.setState({
+    //   fontLoaded: true,
+    //   appIsReady: true
+    // });
   }
 
   commit(action, payload, cb = null) {
