@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import styles from "../styles.js";
+import styles from "../styles";
 // import SvgUri from "react-native-svg-uri";
 // import gameModes from "../Content/gameModes.js";
 

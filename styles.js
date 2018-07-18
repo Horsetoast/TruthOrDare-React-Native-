@@ -6,10 +6,11 @@ const defaults = {
     orange: "#db7b26",
     white: "#ffffff",
     male: "#1f97eb",
-    female: "#d337db"
+    female: "#d337db",
+    grey: "#555555"
   },
   generic: {
-    borderRadius: 6,
+    borderRadius: 25,
     fontSizeMedium: 18,
     fontSizeLarge: 30,
     fontFamily: "TitilliumWeb-Regular"
@@ -20,6 +21,7 @@ const button = {
   paddingHorizontal: 20,
   paddingVertical: 8,
   marginVertical: 10,
+  alignSelf: "center",
   borderRadius: defaults.generic.borderRadius
 };
 
@@ -45,6 +47,11 @@ export default {
     ...button,
     backgroundColor: defaults.colors.primaryDark
   },
+  buttonInverted: {
+    ...button,
+    borderWidth: 1,
+    borderColor: defaults.colors.white
+  },
   textInput,
   buttonText: {
     fontFamily: defaults.generic.fontFamily,
@@ -59,6 +66,6 @@ export default {
   svg: {
     iconMale: require("./assets/svg/icon_male.svg"),
     iconFemale: require("./assets/svg/icon_female.svg"),
-    iconTimes: require("./assets/svg/icon_times.svg"),
+    iconTimes: require("./assets/svg/icon_times.svg")
   }
 };

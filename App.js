@@ -1,10 +1,10 @@
 "use strict";
 
 import React from "react";
-import PlayersScreen from "./Screens/PlayersScreen.js";
-import AddPlayerScreen from "./Screens/AddPlayerScreen.js";
-import GameModeScreen from "./Screens/GameModeScreen.js";
-import DrawScreen from "./Screens/DrawScreen.js";
+import PlayersScreen from "./Screens/PlayersScreen";
+import AddPlayerScreen from "./Screens/AddPlayerScreen";
+import GameModeScreen from "./Screens/GameModeScreen";
+import DrawScreen from "./Screens/DrawScreen";
 // import cacheAssetsAsync from "./cachedAssetsAsync";
 import styles from "./styles";
 import { StackNavigator } from "react-navigation";

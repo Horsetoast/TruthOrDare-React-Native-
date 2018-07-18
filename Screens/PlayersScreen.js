@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
   ScrollView
 } from "react-native";
-import styles from "../styles.js";
+import styles from "../styles";
+import CustomButton from "../Components/CustomButton";
 import SvgUri from "react-native-svg-uri";
-import gameModes from "../Content/gameModes.js";
+import gameModes from "../Content/gameModes";
 
 export default class PlayersScreen extends React.Component {
   constructor(props) {
@@ -63,15 +64,6 @@ export default class PlayersScreen extends React.Component {
             zIndex: 0
           }}
         />
-        {/* <Text
-                  style={{
-                    fontSize: styles.generic.fontSizeLarge,
-                    color: styles.colors.white,
-                    fontFamily: styles.generic.fontFamily
-                  }}
-                >
-                  Mode {gameModes[mode].name}
-                </Text> */}
         <Text
           style={{
             fontSize: styles.generic.fontSizeSmall,
@@ -116,7 +108,6 @@ export default class PlayersScreen extends React.Component {
         </View>
         <ScrollView
           ref={c => (this.playersList = c)}
-          // onLayout={ev => this.scrollPlayersList(ev)}
           onContentSizeChange={(contentWidth, contentHeight) => {
             this.playersList.scrollToEnd({
               animated: true
@@ -153,18 +144,6 @@ export default class PlayersScreen extends React.Component {
                     flexDirection: "row"
                   }}
                 >
-                  {/* <View
-                                style={{
-                                  fill:
-                                    player.gender === "M"
-                                      ? styles.colors.male
-                                      : styles.colors.female,
-                                  width: 10,
-                                  height: 10,
-                                  borderRadius: 10,
-                                  marginRight: 15
-                                }}
-                              /> */}
                   <View
                     style={{
                       marginRight: 10
@@ -224,19 +203,17 @@ export default class PlayersScreen extends React.Component {
           </View>
         </ScrollView>
         <View>
-          <TouchableOpacity
-            onPress={() => navigate("AddPlayer")}
-            style={styles.buttonSecondary}
-          >
-            <Text style={styles.buttonText}> Add Player </Text>
-          </TouchableOpacity>
+          <CustomButton
+            text="Add Player"
+            pressHandler={() => navigate("AddPlayer")}
+            type="secondary"
+          />
           {this.props.screenProps.players.length > 1 ? (
-            <TouchableOpacity
-              onPress={this.startGame.bind(this)}
-              style={styles.buttonPrimary}
-            >
-              <Text style={styles.buttonText}> Start Game </Text>
-            </TouchableOpacity>
+            <CustomButton
+              text="Start Game"
+              pressHandler={this.startGame.bind(this)}
+              type="primary"
+            />
           ) : null}
         </View>
       </View>

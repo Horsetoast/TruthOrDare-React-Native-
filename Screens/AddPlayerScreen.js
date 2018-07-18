@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Button,
+  ScrollView,
   Keyboard
 } from "react-native";
-import styles from "../styles.js";
+import styles from "../styles";
 import SvgUri from "react-native-svg-uri";
 
 export default class PlayersScreen extends React.Component {
@@ -37,9 +38,8 @@ export default class PlayersScreen extends React.Component {
       playerName: "",
       playerGender: "M"
     });
-    Keyboard.dismiss().then(() => {
-      this.props.navigation.navigate("Players");
-    });
+    Keyboard.dismiss();
+    this.props.navigation.navigate("Players");
   }
 
   setGender(gender) {
@@ -51,100 +51,105 @@ export default class PlayersScreen extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: styles.colors.primary
-        }}
-        keyboardVerticalOffset={-200}
-        behavior="padding"
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
       >
-        <Text
+        <KeyboardAvoidingView
           style={{
-            paddingVertical: 20,
-            fontSize: styles.generic.fontSizeLarge,
-            color: styles.colors.white,
-            maxWidth: "70%"
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: styles.colors.primary
           }}
+          keyboardVerticalOffset={-200}
+          behavior="padding"
         >
-          What's your name?
-        </Text>
-        <TextInput
-          maxLength={30}
-          placeholderTextColor={styles.colors.primaryLight}
-          underlineColorAndroid="transparent"
-          style={{
-            ...styles.textInput,
-            width: 200,
-            marginBottom: 30
-          }}
-          onChangeText={text => this.setState({ playerName: text })}
-          value={this.state.playerName}
-        />
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-around"
-          }}
-        >
-          <TouchableWithoutFeedback onPress={() => this.setGender("M")}>
-            <View>
-              <SvgUri
-                width="100"
-                fill={
-                  this.state.playerGender === "M"
-                    ? styles.colors.male
-                    : styles.colors.primaryDark
-                }
-                height="100"
-                source={styles.svg.iconMale}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() => this.setGender("F")}>
-            <View>
-              <SvgUri
-                width="100"
-                fill={
-                  this.state.playerGender === "F"
-                    ? styles.colors.female
-                    : styles.colors.primaryDark
-                }
-                height="100"
-                source={styles.svg.iconFemale}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-        <View
-          style={{
-            paddingBottom: 100,
-            width: "100%",
-            alignItems: "center"
-          }}
-        >
-          <TouchableOpacity
-            onPress={this.addPlayer.bind(this)}
+          <Text
             style={{
-              ...styles.buttonPrimary,
-              flexWrap: "wrap"
+              paddingVertical: 20,
+              fontSize: styles.generic.fontSizeLarge,
+              color: styles.colors.white,
+              maxWidth: "70%"
             }}
           >
-            <Text style={styles.buttonText}>Add Player</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.return.bind(this)}
+            What's your name?
+          </Text>
+          <TextInput
+            maxLength={30}
+            placeholderTextColor={styles.colors.primaryLight}
+            underlineColorAndroid="transparent"
             style={{
-              ...styles.buttonSecondary,
-              flexWrap: "wrap"
+              ...styles.textInput,
+              width: 200,
+              marginBottom: 30
+            }}
+            onChangeText={text => this.setState({ playerName: text })}
+            value={this.state.playerName}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around"
             }}
           >
-            <Text style={styles.buttonText}>Return</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+            <TouchableWithoutFeedback onPress={() => this.setGender("M")}>
+              <View>
+                <SvgUri
+                  width="80"
+                  fill={
+                    this.state.playerGender === "M"
+                      ? styles.colors.male
+                      : styles.colors.primaryDark
+                  }
+                  height="80"
+                  source={styles.svg.iconMale}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => this.setGender("F")}>
+              <View>
+                <SvgUri
+                  width="80"
+                  fill={
+                    this.state.playerGender === "F"
+                      ? styles.colors.female
+                      : styles.colors.primaryDark
+                  }
+                  height="80"
+                  source={styles.svg.iconFemale}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+          <View
+            style={{
+              paddingBottom: 100,
+              width: "100%",
+              alignItems: "center"
+            }}
+          >
+            <TouchableOpacity
+              onPress={this.addPlayer.bind(this)}
+              style={{
+                ...styles.buttonPrimary,
+                flexWrap: "wrap"
+              }}
+            >
+              <Text style={styles.buttonText}>Add Player</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.return.bind(this)}
+              style={{
+                ...styles.buttonSecondary,
+                flexWrap: "wrap"
+              }}
+            >
+              <Text style={styles.buttonText}>Return</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }

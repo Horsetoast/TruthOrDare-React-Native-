@@ -1,8 +1,11 @@
 {
   "eslint.autoFixOnSave": false,
   "eslint.packageManager": "yarn",
-  "eslint.enable": false,
+  "eslint.enable": true,
   "editor.formatOnSave": true,
-  "javascript.format.enable": true,
-  "prettier.eslintIntegration": true
+  "javascript.format.enable": false,
+  "prettier.eslintIntegration": true,
+  "files.associations": {
+    "*.js": "javascriptreact"
+  }
 }

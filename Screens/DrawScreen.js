@@ -1,15 +1,20 @@
 import React from "react";
-import gameModes from "../Content/gameModes.js";
+import gameModes from "../Content/gameModes";
 
-import { View, Text, Button, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Animated } from "react-native";
+import CustomButton from "../Components/CustomButton";
+import CustomModal from "../Components/CustomModal";
+import ResultCard from "../Components/ResultCard";
 import SvgUri from "react-native-svg-uri";
-import styles from "../styles.js";
+import styles from "../styles";
 
 export default class PlayersScreen extends React.Component {
   constructor(props) {
     super(props);
     this.commit = this.props.screenProps.commit;
+    this.resultCard = React.createRef();
     this.state = {
+      endGamePrompt: false,
       truth: null,
       dare: null,
       drawn: false
@@ -17,8 +22,28 @@ export default class PlayersScreen extends React.Component {
   }
 
   endGame() {
-    this.commit("endGame", null, () => {
-      this.props.navigation.navigate("Players");
+    if (!this.state.endGamePrompt) {
+      this.setState({
+        endGamePrompt: true
+      });
+      return;
+    }
+
+    this.setState(
+      {
+        endGamePrompt: false
+      },
+      () => {
+        this.commit("endGame", null, () => {
+          this.props.navigation.navigate("Players");
+        });
+      }
+    );
+  }
+
+  closePrompt() {
+    this.setState({
+      endGamePrompt: false
     });
   }
 
@@ -48,6 +73,22 @@ export default class PlayersScreen extends React.Component {
     });
   }
 
+  drawUpdate(type, payload) {
+    this.setState(
+      {
+        [type]: payload,
+        drawn: true
+      },
+      () => {
+        this.resultCard.animateCardIn(() => {
+          this.setState({
+            cardReady: true
+          });
+        });
+      }
+    );
+  }
+
   drawTruth() {
     /* If we run out of unpicked
     reset them and start again */
@@ -64,20 +105,18 @@ export default class PlayersScreen extends React.Component {
     if (pickedTruths.length === gameModes[mode]["truths"].length) {
       this.commit("resetPickedTruths", null, () => {
         this.commit("addPickedTruth", randomIndex, () => {
-          this.setState({
-            truth: drawnTruth,
-            drawn: true
-          });
+          // this.setState({
+          //   truth: drawnTruth,
+          //   drawn: true
+          // });
+          this.drawUpdate("truth", drawnTruth);
         });
       });
     } else if (pickedTruths.indexOf(randomIndex) !== -1) {
       this.drawTruth();
     } else {
       this.commit("addPickedTruth", randomIndex, () => {
-        this.setState({
-          truth: drawnTruth,
-          drawn: true
-        });
+        this.drawUpdate("truth", drawnTruth);
       });
     }
   }
@@ -98,30 +137,30 @@ export default class PlayersScreen extends React.Component {
     if (pickedDares.length === gameModes[mode]["dares"].length) {
       this.commit("resetPickedDares", null, () => {
         this.commit("addPickedDare", randomIndex, () => {
-          this.setState({
-            dare: drawnDare,
-            drawn: true
-          });
+          this.drawUpdate("dare", drawnDare);
         });
       });
     } else if (pickedDares.indexOf(randomIndex) !== -1) {
       this.drawDare();
     } else {
       this.commit("addPickedDare", randomIndex, () => {
-        this.setState({
-          dare: drawnDare,
-          drawn: true
-        });
+        this.drawUpdate("dare", drawnDare);
       });
     }
   }
 
   nextPlayer() {
-    this.commit("nextPlayer", null, () => {
-      this.setState({
-        truth: null,
-        dare: null,
-        drawn: false
+    this.setState({
+      cardReady: false
+    });
+
+    this.resultCard.animateCardOut(() => {
+      this.commit("nextPlayer", null, () => {
+        this.setState({
+          truth: null,
+          dare: null,
+          drawn: false
+        });
       });
     });
   }
@@ -139,37 +178,57 @@ export default class PlayersScreen extends React.Component {
   }
 
   showDrawOptions() {
+    const player = this.props.screenProps.players[
+      this.props.screenProps.drawingPlayer
+    ];
+
     return (
       <View>
         <Text
           style={{
-            paddingVertical: 20,
-            fontSize: styles.generic.fontSizeLarge,
+            paddingBottom: 15,
+            fontSize: styles.generic.fontSizeMedium,
             color: styles.colors.white
           }}
         >
           Draw a card
         </Text>
-        <TouchableOpacity
-          onPress={this.drawTruth.bind(this)}
-          style={styles.buttonPrimary}
+        {player && (
+          <Text
+            style={{
+              fontSize: styles.generic.fontSizeLarge,
+              paddingBottom: 60,
+              alignSelf: "center",
+              color:
+                player.gender === "M"
+                  ? styles.colors.male
+                  : styles.colors.female
+            }}
+          >
+            {player.name}
+          </Text>
+        )}
+        <CustomButton
+          pressHandler={this.drawTruth.bind(this)}
+          type="primary"
+          text="Truth"
           key="truth"
-        >
-          <Text style={styles.buttonText}>Truth</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={this.drawDare.bind(this)}
-          style={styles.buttonPrimary}
+        />
+        <CustomButton
+          pressHandler={this.drawDare.bind(this)}
+          type="primary"
+          text="Dare"
           key="dare"
-        >
-          <Text style={styles.buttonText}>Dare</Text>
-        </TouchableOpacity>
+        />
       </View>
     );
   }
 
   showDrawnResult() {
     const result = this.getResult();
+    const player = this.props.screenProps.players[
+      this.props.screenProps.drawingPlayer
+    ];
 
     return (
       <View
@@ -179,72 +238,68 @@ export default class PlayersScreen extends React.Component {
       >
         <Text
           style={{
-            paddingVertical: 20,
-            fontSize: styles.generic.fontSizeLarge,
+            paddingBottom: 15,
+            fontSize: styles.generic.fontSizeMedium,
             color: styles.colors.white
           }}
         >
-          {this.state.dare ? "Dare" : "Question"}
+          {this.state.dare ? "Dare for " : "Question for"}
         </Text>
-        <View
-          style={{
-            backgroundColor: styles.colors.primary,
-            width: "80%",
-            justifyContent: "center",
-            position: "relative",
-            padding: 30,
-            marginBottom: 30,
-            zIndex: 1,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 4,
-            elevation: 4
-          }}
-        >
+        {player && (
           <Text
             style={{
-              fontSize: styles.generic.fontSizeMedium,
-              color: styles.colors.white
+              paddingBottom: 30,
+              fontSize: styles.generic.fontSizeLarge,
+              color:
+                player.gender === "M"
+                  ? styles.colors.male
+                  : styles.colors.female
             }}
           >
-            {result}
+            {player.name}
           </Text>
-        </View>
-        <TouchableOpacity
-          onPress={this.nextPlayer.bind(this)}
-          style={{
-            ...styles.buttonSecondary,
-            alignSelf: "center"
-          }}
-        >
-          <Text
+        )}
+        <ResultCard ref={c => (this.resultCard = c)} result={result} />
+        {this.state.cardReady && (
+          <CustomButton
+            pressHandler={this.nextPlayer.bind(this)}
+            type="secondary"
+            text="Completed"
             style={{
-              ...styles.buttonText
+              alignSelf: "center"
             }}
-          >
-            Done!
-          </Text>
-        </TouchableOpacity>
+          />
+        )}
       </View>
     );
   }
 
   render() {
-    const player = this.props.screenProps.players[
-      this.props.screenProps.drawingPlayer
-    ];
-
     return (
       <View
         style={{
           flex: 1,
           flexDirection: "column",
-          justifyContent: "center",
+          position: "relative",
           alignItems: "center",
           backgroundColor: styles.colors.primary
         }}
-        behavior="padding"
       >
+        <CustomModal
+          visible={this.state.endGamePrompt}
+          buttons={[
+            {
+              text: "End game",
+              pressHandler: this.endGame.bind(this),
+              type: "secondary"
+            },
+            {
+              text: "Return",
+              pressHandler: this.closePrompt.bind(this)
+            }
+          ]}
+          closeHandler={this.closePrompt.bind(this)}
+        />
         <TouchableOpacity
           onPress={() => this.endGame()}
           style={{
@@ -252,7 +307,7 @@ export default class PlayersScreen extends React.Component {
             position: "absolute",
             width: 50,
             height: 50,
-            top: 50,
+            top: 40,
             left: 30,
             borderRadius: 25,
             justifyContent: "center",
@@ -277,17 +332,13 @@ export default class PlayersScreen extends React.Component {
             zIndex: 0
           }}
         />
-        {player && (
-          <Text
-            style={{
-              fontSize: styles.generic.fontSizeMedium,
-              color: styles.colors.white
-            }}
-          >
-            {player.name}
-          </Text>
-        )}
-        {this.state.drawn ? this.showDrawnResult() : this.showDrawOptions()}
+        <View
+          style={{
+            paddingTop: "40%"
+          }}
+        >
+          {this.state.drawn ? this.showDrawnResult() : this.showDrawOptions()}
+        </View>
       </View>
     );
   }
