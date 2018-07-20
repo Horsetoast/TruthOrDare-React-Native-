@@ -5,6 +5,8 @@ import { View, Text, Image, TouchableOpacity, Animated } from "react-native";
 import CustomButton from "../Components/CustomButton";
 import CustomModal from "../Components/CustomModal";
 import ResultCard from "../Components/ResultCard";
+import FadeView from "../Components/FadeView";
+import PlayerActionHeader from "../Components/PlayerActionHeader";
 import SvgUri from "react-native-svg-uri";
 import styles from "../styles";
 
@@ -12,13 +14,14 @@ export default class PlayersScreen extends React.Component {
   constructor(props) {
     super(props);
     this.commit = this.props.screenProps.commit;
-    this.resultCard = React.createRef();
     this.state = {
       endGamePrompt: false,
+      fadeText: false,
       truth: null,
       dare: null,
       drawn: false
     };
+    this._resultCard = React.createRef();
   }
 
   endGame() {
@@ -73,14 +76,14 @@ export default class PlayersScreen extends React.Component {
     });
   }
 
-  drawUpdate(type, payload) {
+  _drawUpdate(type, payload) {
     this.setState(
       {
         [type]: payload,
         drawn: true
       },
       () => {
-        this.resultCard.animateCardIn(() => {
+        this._resultCard.animateCardIn(() => {
           this.setState({
             cardReady: true
           });
@@ -109,14 +112,14 @@ export default class PlayersScreen extends React.Component {
           //   truth: drawnTruth,
           //   drawn: true
           // });
-          this.drawUpdate("truth", drawnTruth);
+          this._drawUpdate("truth", drawnTruth);
         });
       });
     } else if (pickedTruths.indexOf(randomIndex) !== -1) {
       this.drawTruth();
     } else {
       this.commit("addPickedTruth", randomIndex, () => {
-        this.drawUpdate("truth", drawnTruth);
+        this._drawUpdate("truth", drawnTruth);
       });
     }
   }
@@ -137,14 +140,14 @@ export default class PlayersScreen extends React.Component {
     if (pickedDares.length === gameModes[mode]["dares"].length) {
       this.commit("resetPickedDares", null, () => {
         this.commit("addPickedDare", randomIndex, () => {
-          this.drawUpdate("dare", drawnDare);
+          this._drawUpdate("dare", drawnDare);
         });
       });
     } else if (pickedDares.indexOf(randomIndex) !== -1) {
       this.drawDare();
     } else {
       this.commit("addPickedDare", randomIndex, () => {
-        this.drawUpdate("dare", drawnDare);
+        this._drawUpdate("dare", drawnDare);
       });
     }
   }
@@ -154,7 +157,7 @@ export default class PlayersScreen extends React.Component {
       cardReady: false
     });
 
-    this.resultCard.animateCardOut(() => {
+    this._resultCard.animateCardOut(() => {
       this.commit("nextPlayer", null, () => {
         this.setState({
           truth: null,
@@ -184,7 +187,7 @@ export default class PlayersScreen extends React.Component {
 
     return (
       <View>
-        <Text
+        {/* <Text
           style={{
             paddingBottom: 15,
             fontSize: styles.generic.fontSizeMedium,
@@ -207,7 +210,7 @@ export default class PlayersScreen extends React.Component {
           >
             {player.name}
           </Text>
-        )}
+        )} */}
         <CustomButton
           pressHandler={this.drawTruth.bind(this)}
           type="primary"
@@ -233,10 +236,11 @@ export default class PlayersScreen extends React.Component {
     return (
       <View
         style={{
-          alignItems: "center"
+          alignItems: "center",
+          flex: 1
         }}
       >
-        <Text
+        {/* <Text
           style={{
             paddingBottom: 15,
             fontSize: styles.generic.fontSizeMedium,
@@ -258,23 +262,31 @@ export default class PlayersScreen extends React.Component {
           >
             {player.name}
           </Text>
-        )}
-        <ResultCard ref={c => (this.resultCard = c)} result={result} />
-        {this.state.cardReady && (
+        )} */}
+        <ResultCard ref={c => (this._resultCard = c)} result={result} />
+        <FadeView visible={this.state.cardReady}>
           <CustomButton
             pressHandler={this.nextPlayer.bind(this)}
-            type="secondary"
+            touchableType="highlight"
+            type="primary"
             text="Completed"
             style={{
               alignSelf: "center"
             }}
           />
-        )}
+        </FadeView>
+        {/* {this.state.cardReady && (
+
+        )} */}
       </View>
     );
   }
 
   render() {
+    const player = this.props.screenProps.players[
+      this.props.screenProps.drawingPlayer
+    ];
+
     return (
       <View
         style={{
@@ -334,9 +346,18 @@ export default class PlayersScreen extends React.Component {
         />
         <View
           style={{
-            paddingTop: "40%"
+            paddingTop: "40%",
+            alignItems: "center"
           }}
         >
+          <PlayerActionHeader
+            drawnType={this.state.dare ? "dare" : "truth"}
+            isDrawn={this.state.drawn}
+            player={player}
+            style={{
+              alignItems: "center"
+            }}
+          />
           {this.state.drawn ? this.showDrawnResult() : this.showDrawOptions()}
         </View>
       </View>
