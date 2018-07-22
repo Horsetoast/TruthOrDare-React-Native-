@@ -16,6 +16,7 @@ export default class PlayersScreen extends React.Component {
     this.commit = this.props.screenProps.commit;
     this.state = {
       endGamePrompt: false,
+      playerHeaderState: "waiting",
       fadeText: false,
       truth: null,
       dare: null,
@@ -80,7 +81,8 @@ export default class PlayersScreen extends React.Component {
     this.setState(
       {
         [type]: payload,
-        drawn: true
+        drawn: true,
+        playerHeaderState: "drawn"
       },
       () => {
         this._resultCard.animateCardIn(() => {
@@ -154,7 +156,8 @@ export default class PlayersScreen extends React.Component {
 
   nextPlayer() {
     this.setState({
-      cardReady: false
+      cardReady: false,
+      playerHeaderState: "fade"
     });
 
     this._resultCard.animateCardOut(() => {
@@ -162,7 +165,8 @@ export default class PlayersScreen extends React.Component {
         this.setState({
           truth: null,
           dare: null,
-          drawn: false
+          drawn: false,
+          playerHeaderState: "waiting"
         });
       });
     });
@@ -187,30 +191,6 @@ export default class PlayersScreen extends React.Component {
 
     return (
       <View>
-        {/* <Text
-          style={{
-            paddingBottom: 15,
-            fontSize: styles.generic.fontSizeMedium,
-            color: styles.colors.white
-          }}
-        >
-          Draw a card
-        </Text>
-        {player && (
-          <Text
-            style={{
-              fontSize: styles.generic.fontSizeLarge,
-              paddingBottom: 60,
-              alignSelf: "center",
-              color:
-                player.gender === "M"
-                  ? styles.colors.male
-                  : styles.colors.female
-            }}
-          >
-            {player.name}
-          </Text>
-        )} */}
         <CustomButton
           pressHandler={this.drawTruth.bind(this)}
           type="primary"
@@ -347,12 +327,13 @@ export default class PlayersScreen extends React.Component {
         <View
           style={{
             paddingTop: "40%",
+            flex: 1,
             alignItems: "center"
           }}
         >
           <PlayerActionHeader
             drawnType={this.state.dare ? "dare" : "truth"}
-            isDrawn={this.state.drawn}
+            headerState={this.state.playerHeaderState}
             player={player}
             style={{
               alignItems: "center"

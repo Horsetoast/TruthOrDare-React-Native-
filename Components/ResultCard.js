@@ -42,7 +42,7 @@ export default class ResultCard extends React.Component {
         style={{
           backgroundColor: styles.colors.white,
           borderRadius: 10,
-          width: "90%",
+          width: "80%",
           justifyContent: "center",
           left: this.cardX,
           position: "relative",
