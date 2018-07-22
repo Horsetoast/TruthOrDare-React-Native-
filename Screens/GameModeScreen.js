@@ -73,7 +73,7 @@ export default class GameModeScreen extends React.Component {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.setGameMode("friends")}
+              onPress={() => this.setGameMode("wild")}
               style={{
                 backgroundColor: styles.colors.primary,
                 width: "100%",

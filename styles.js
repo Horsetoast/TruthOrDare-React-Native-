@@ -11,6 +11,7 @@ const defaults = {
   },
   generic: {
     borderRadius: 25,
+    fontSizeSmall: 14,
     fontSizeMedium: 18,
     fontSizeLarge: 30,
     fontFamily: "TitilliumWeb-Regular"
@@ -66,6 +67,8 @@ export default {
   svg: {
     iconMale: require("./assets/svg/icon_male.svg"),
     iconFemale: require("./assets/svg/icon_female.svg"),
-    iconTimes: require("./assets/svg/icon_times.svg")
+    iconTimes: require("./assets/svg/icon_times.svg"),
+    iconMenu: require("./assets/svg/icon_menu.svg"),
+    iconArrowLeft: require("./assets/svg/icon_arrow_left.svg")
   }
 };

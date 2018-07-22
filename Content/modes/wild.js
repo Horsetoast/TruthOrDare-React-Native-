@@ -11,7 +11,7 @@ const dares = [
 ];
 
 export default {
-  name: "Friends",
+  name: "Wild & Raunchy",
   truths,
   dares
 };

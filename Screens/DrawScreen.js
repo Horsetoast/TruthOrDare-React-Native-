@@ -297,10 +297,10 @@ export default class PlayersScreen extends React.Component {
           style={{
             zIndex: 10,
             position: "absolute",
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
             top: 40,
-            left: 30,
+            right: 30,
             borderRadius: 25,
             justifyContent: "center",
             alignItems: "center",

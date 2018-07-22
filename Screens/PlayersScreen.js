@@ -33,6 +33,10 @@ export default class PlayersScreen extends React.Component {
     });
   }
 
+  returnToModes() {
+    this.props.navigation.navigate("GameMode");
+  }
+
   scrollPlayersList(ev) {
     const height = ev.nativeEvent.layout.height;
     if (height) {
@@ -64,7 +68,7 @@ export default class PlayersScreen extends React.Component {
             zIndex: 0
           }}
         />
-        <Text
+        {/* <Text
           style={{
             fontSize: styles.generic.fontSizeSmall,
             color: styles.colors.white,
@@ -76,13 +80,15 @@ export default class PlayersScreen extends React.Component {
           }}
         >
           Game mode
-        </Text>
+        </Text> */}
         <View
           style={{
             backgroundColor: styles.colors.primary,
-            width: "80%",
+            width: "85%",
             height: 80,
-            justifyContent: "center",
+            justifyContent: "space-between",
+            flexDirection: "row",
+            alignItems: "center",
             position: "relative",
             paddingHorizontal: 30,
             zIndex: 1,
@@ -96,15 +102,44 @@ export default class PlayersScreen extends React.Component {
             elevation: 4
           }}
         >
-          <Text
+          <View>
+            <Text
+              style={{
+                fontSize: styles.generic.fontSizeSmall,
+                color: styles.colors.primaryLight,
+                fontFamily: styles.generic.fontFamily
+              }}
+            >
+              Game mode
+            </Text>
+            <Text
+              style={{
+                fontSize: styles.generic.fontSizeMedium,
+                color: styles.colors.white,
+                fontFamily: styles.generic.fontFamily
+              }}
+            >
+              {gameModes[mode].name}
+            </Text>
+          </View>
+          <TouchableOpacity
             style={{
-              fontSize: styles.generic.fontSizeLarge,
-              color: styles.colors.white,
-              fontFamily: styles.generic.fontFamily
+              width: 40,
+              height: 40,
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 25,
+              backgroundColor: styles.colors.primaryDark
             }}
+            onPress={this.returnToModes.bind(this)}
           >
-            {gameModes[mode].name}
-          </Text>
+            <SvgUri
+              width="15"
+              height="15"
+              fill={styles.colors.white}
+              source={styles.svg.iconArrowLeft}
+            />
+          </TouchableOpacity>
         </View>
         <ScrollView
           ref={c => (this.playersList = c)}
