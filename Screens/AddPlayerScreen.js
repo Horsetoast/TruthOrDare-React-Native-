@@ -11,7 +11,7 @@ import {
   ScrollView,
   Keyboard
 } from "react-native";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 import SvgUri from "react-native-svg-uri";
 import CustomButton from "../Components/CustomButton";
 
@@ -61,7 +61,7 @@ export default class PlayersScreen extends React.Component {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: styles.colors.primary
+            backgroundColor: defaults.colors.primary
           }}
           keyboardVerticalOffset={-200}
           behavior="padding"
@@ -69,8 +69,8 @@ export default class PlayersScreen extends React.Component {
           <Text
             style={{
               paddingVertical: 20,
-              fontSize: styles.generic.fontSizeLarge,
-              color: styles.colors.white,
+              fontSize: defaults.generic.fontSizeLarge,
+              color: defaults.colors.white,
               maxWidth: "70%"
             }}
           >
@@ -78,7 +78,7 @@ export default class PlayersScreen extends React.Component {
           </Text>
           <TextInput
             maxLength={30}
-            placeholderTextColor={styles.colors.primaryLight}
+            placeholderTextColor={defaults.colors.primaryLight}
             underlineColorAndroid="transparent"
             style={{
               ...styles.textInput,
@@ -100,11 +100,11 @@ export default class PlayersScreen extends React.Component {
                   width="80"
                   fill={
                     this.state.playerGender === "M"
-                      ? styles.colors.male
-                      : styles.colors.primaryDark
+                      ? defaults.colors.male
+                      : defaults.colors.primaryDark
                   }
                   height="80"
-                  source={styles.svg.iconMale}
+                  source={assets.svg.iconMale}
                 />
               </View>
             </TouchableWithoutFeedback>
@@ -114,11 +114,11 @@ export default class PlayersScreen extends React.Component {
                   width="80"
                   fill={
                     this.state.playerGender === "F"
-                      ? styles.colors.female
-                      : styles.colors.primaryDark
+                      ? defaults.colors.female
+                      : defaults.colors.primaryDark
                   }
                   height="80"
-                  source={styles.svg.iconFemale}
+                  source={assets.svg.iconFemale}
                 />
               </View>
             </TouchableWithoutFeedback>

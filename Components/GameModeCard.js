@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity, Image, View } from "react-native";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 import gameModes from "../Content/gameModes.js";
 
 export default props => {
@@ -9,7 +9,7 @@ export default props => {
     <TouchableOpacity
       onPress={() => props.pressHandler(props.mode)}
       style={{
-        backgroundColor: styles.colors.primary,
+        backgroundColor: defaults.colors.primary,
         flex: 1,
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
@@ -20,7 +20,7 @@ export default props => {
       }}
     >
       <Image
-        source={styles.images[mode.image]}
+        source={assets.images[mode.image]}
         style={{
           width: "100%",
           height: "100%"
@@ -31,7 +31,7 @@ export default props => {
           height: 40,
           marginLeft: 10,
           justifyContent: "center",
-          backgroundColor: styles.colors.primaryDark,
+          backgroundColor: defaults.colors.primaryDark,
           paddingHorizontal: 20,
           alignSelf: "flex-start",
           position: "relative",
@@ -40,7 +40,7 @@ export default props => {
           zIndex: 1
         }}
       >
-        <Text style={{ color: styles.colors.white }}>{mode.name}</Text>
+        <Text style={{ color: defaults.colors.white }}>{mode.name}</Text>
       </View>
     </TouchableOpacity>
   );

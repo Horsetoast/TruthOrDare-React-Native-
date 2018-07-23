@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import GameModeCard from "../Components/GameModeCard";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 // import SvgUri from "react-native-svg-uri";
 
 export default class GameModeScreen extends React.Component {
@@ -22,12 +22,12 @@ export default class GameModeScreen extends React.Component {
         style={{
           flex: 1,
           alignItems: "center",
-          backgroundColor: styles.colors.primary
+          backgroundColor: defaults.colors.primary
         }}
       >
         <View
           style={{
-            backgroundColor: styles.colors.primary,
+            backgroundColor: defaults.colors.primary,
             width: "90%",
             height: 80,
             justifyContent: "space-between",
@@ -58,9 +58,9 @@ export default class GameModeScreen extends React.Component {
             </Text> */}
             <Text
               style={{
-                fontSize: styles.generic.fontSizeMedium,
-                color: styles.colors.white,
-                fontFamily: styles.generic.fontFamily
+                fontSize: defaults.generic.fontSizeMedium,
+                color: defaults.colors.white,
+                fontFamily: defaults.generic.fontFamily
               }}
             >
               Choose game mode
@@ -84,7 +84,7 @@ export default class GameModeScreen extends React.Component {
             padding: 20,
             paddingTop: 50,
             width: "100%",
-            backgroundColor: styles.colors.primaryDark
+            backgroundColor: defaults.colors.primaryDark
           }}
         >
           <View

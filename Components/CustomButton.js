@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity, TouchableHighlight } from "react-native";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 
 const buttonStyles = {
   primary: "buttonPrimary",
@@ -16,14 +16,27 @@ export default props => {
       <TouchableHighlight
         onPress={props.pressHandler}
         underlayColor={style.backgroundColor}
-        style={style}
+        style={[
+          style,
+          {
+            alignSelf: props.fullwidth ? "stretch" : "auto"
+          }
+        ]}
       >
         <Text style={styles.buttonText}> {props.text} </Text>
       </TouchableHighlight>
     );
   } else {
     return (
-      <TouchableOpacity onPress={props.pressHandler} style={style}>
+      <TouchableOpacity
+        onPress={props.pressHandler}
+        style={[
+          style,
+          {
+            alignSelf: props.fullwidth ? "stretch" : "auto"
+          }
+        ]}
+      >
         <Text style={styles.buttonText}> {props.text} </Text>
       </TouchableOpacity>
     );

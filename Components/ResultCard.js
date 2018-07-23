@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, Animated } from "react-native";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 
 export default class ResultCard extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ export default class ResultCard extends React.Component {
     return (
       <Animated.View
         style={{
-          backgroundColor: styles.colors.white,
+          backgroundColor: defaults.colors.white,
           borderRadius: 10,
           width: "80%",
           justifyContent: "center",
@@ -57,8 +57,8 @@ export default class ResultCard extends React.Component {
       >
         <Text
           style={{
-            fontSize: styles.generic.fontSizeMedium,
-            color: styles.colors.grey
+            fontSize: defaults.generic.fontSizeMedium,
+            color: defaults.colors.grey
           }}
         >
           {result}

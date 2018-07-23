@@ -8,7 +8,7 @@ import ResultCard from "../Components/ResultCard";
 import FadeView from "../Components/FadeView";
 import PlayerActionHeader from "../Components/PlayerActionHeader";
 import SvgUri from "react-native-svg-uri";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 
 export default class PlayersScreen extends React.Component {
   constructor(props) {
@@ -64,8 +64,8 @@ export default class PlayersScreen extends React.Component {
             style={{
               color:
                 randomPlayer.gender === "M"
-                  ? styles.colors.male
-                  : styles.colors.female
+                  ? defaults.colors.male
+                  : defaults.colors.female
             }}
           >
             {randomPlayer.name}
@@ -274,7 +274,7 @@ export default class PlayersScreen extends React.Component {
           flexDirection: "column",
           position: "relative",
           alignItems: "center",
-          backgroundColor: styles.colors.primary
+          backgroundColor: defaults.colors.primary
         }}
       >
         <CustomModal
@@ -304,18 +304,18 @@ export default class PlayersScreen extends React.Component {
             borderRadius: 25,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: styles.colors.primaryDark
+            backgroundColor: defaults.colors.primaryDark
           }}
         >
           <SvgUri
             width="10"
             height="10"
             fill="#ffffff"
-            source={styles.svg.iconTimes}
+            source={assets.svg.iconTimes}
           />
         </TouchableOpacity>
         <Image
-          source={styles.images.bcgPattern}
+          source={assets.images.bcgPattern}
           style={{
             position: "absolute",
             top: 0,

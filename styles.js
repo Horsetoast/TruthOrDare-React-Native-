@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 const defaults = {
   colors: {
     primary: "#4b0095",
@@ -23,6 +25,7 @@ const button = {
   paddingVertical: 8,
   marginVertical: 10,
   alignSelf: "center",
+  alignItems: "center",
   borderRadius: defaults.generic.borderRadius
 };
 
@@ -38,8 +41,7 @@ const textInput = {
   textAlign: "center"
 };
 
-export default {
-  ...defaults,
+const styles = StyleSheet.create({
   buttonPrimary: {
     ...button,
     backgroundColor: defaults.colors.orange
@@ -51,6 +53,8 @@ export default {
   buttonInverted: {
     ...button,
     borderWidth: 1,
+    paddingHorizontal: button.paddingHorizontal - 2,
+    paddingVertical: button.paddingVertical - 2,
     borderColor: defaults.colors.white
   },
   textInput,
@@ -58,7 +62,10 @@ export default {
     fontFamily: defaults.generic.fontFamily,
     fontSize: defaults.generic.fontSizeMedium,
     color: defaults.colors.white
-  },
+  }
+});
+
+const assets = {
   images: {
     bcgPattern: require("./assets/images/bcg_pattern.png"),
     modeParty: require("./assets/images/mode_party.png"),
@@ -72,3 +79,5 @@ export default {
     iconArrowLeft: require("./assets/svg/icon_arrow_left.svg")
   }
 };
+
+export { defaults, assets, styles };

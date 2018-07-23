@@ -10,7 +10,7 @@ import {
   Modal
 } from "react-native";
 import CustomButton from "./CustomButton";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 
 class CustomModal extends React.Component {
   constructor(props) {

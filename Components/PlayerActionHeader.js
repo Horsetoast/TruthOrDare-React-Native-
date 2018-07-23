@@ -1,6 +1,6 @@
 import React from "react";
 import { Animated, Text } from "react-native";
-import styles from "../styles";
+import { defaults, assets, styles } from "../styles";
 
 export default class PlayerActionHeader extends React.Component {
   constructor(props) {
@@ -75,8 +75,8 @@ export default class PlayerActionHeader extends React.Component {
         <Text
           style={{
             paddingBottom: 15,
-            fontSize: styles.generic.fontSizeMedium,
-            color: styles.colors.white
+            fontSize: defaults.generic.fontSizeMedium,
+            color: defaults.colors.white
           }}
         >
           {headerText}
@@ -85,11 +85,11 @@ export default class PlayerActionHeader extends React.Component {
           <Text
             style={{
               paddingBottom: 30,
-              fontSize: styles.generic.fontSizeLarge,
+              fontSize: defaults.generic.fontSizeLarge,
               color:
                 player.gender === "M"
-                  ? styles.colors.male
-                  : styles.colors.female
+                  ? defaults.colors.male
+                  : defaults.colors.female
             }}
           >
             {player.name}
