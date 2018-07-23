@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import GameModeCard from "../Components/GameModeCard";
 import styles from "../styles";
 // import SvgUri from "react-native-svg-uri";
-// import gameModes from "../Content/gameModes.js";
 
 export default class GameModeScreen extends React.Component {
   constructor(props) {
@@ -25,7 +25,49 @@ export default class GameModeScreen extends React.Component {
           backgroundColor: styles.colors.primary
         }}
       >
-        <Text
+        <View
+          style={{
+            backgroundColor: styles.colors.primary,
+            width: "90%",
+            height: 80,
+            justifyContent: "space-between",
+            flexDirection: "row",
+            alignItems: "center",
+            position: "relative",
+            paddingHorizontal: 30,
+            zIndex: 1,
+            top: 40,
+            shadowOffset: {
+              width: 0,
+              height: 4
+            },
+            shadowOpacity: 0.3,
+            shadowRadius: 4,
+            elevation: 4
+          }}
+        >
+          <View>
+            {/* <Text
+              style={{
+                fontSize: styles.generic.fontSizeSmall,
+                color: styles.colors.primaryLight,
+                fontFamily: styles.generic.fontFamily
+              }}
+            >
+              Game mode
+            </Text> */}
+            <Text
+              style={{
+                fontSize: styles.generic.fontSizeMedium,
+                color: styles.colors.white,
+                fontFamily: styles.generic.fontFamily
+              }}
+            >
+              Choose game mode
+            </Text>
+          </View>
+        </View>
+        {/* <Text
           style={{
             fontSize: styles.generic.fontSizeLarge,
             color: styles.colors.white,
@@ -36,10 +78,11 @@ export default class GameModeScreen extends React.Component {
           }}
         >
           Choose game mode
-        </Text>
+        </Text> */}
         <ScrollView
           style={{
             padding: 20,
+            paddingTop: 50,
             width: "100%",
             backgroundColor: styles.colors.primaryDark
           }}
@@ -49,42 +92,24 @@ export default class GameModeScreen extends React.Component {
               flex: 1
             }}
           >
-            <TouchableOpacity
-              onPress={() => this.setGameMode("friends")}
-              style={{
-                backgroundColor: styles.colors.primary,
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-                shadowOffset: { width: 0, height: 8 },
-                shadowOpacity: 0.5,
-                shadowRadius: 4,
-                elevation: 4,
-                height: 200,
-                marginVertical: 10
-              }}
-            >
-              <Image
-                source={styles.images.modeParty}
-                style={{
-                  width: "100%",
-                  height: "100%"
-                }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
+            <GameModeCard
+              pressHandler={this.setGameMode.bind(this)}
+              mode="party"
+            />
+            <GameModeCard
+              pressHandler={this.setGameMode.bind(this)}
+              mode="wild"
+            />
+            {/* <TouchableOpacity
               onPress={() => this.setGameMode("wild")}
               style={{
                 backgroundColor: styles.colors.primary,
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-                shadowOffset: { width: 0, height: 8 },
-                shadowOpacity: 0.5,
+                flex: 1,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
                 shadowRadius: 4,
                 elevation: 4,
-                height: 200,
-                marginVertical: 10
+                height: 160
               }}
             >
               <Image
@@ -94,7 +119,8 @@ export default class GameModeScreen extends React.Component {
                   height: "100%"
                 }}
               />
-            </TouchableOpacity>
+              <Text>Wild & Raunchy</Text>
+            </TouchableOpacity> */}
           </View>
         </ScrollView>
       </View>

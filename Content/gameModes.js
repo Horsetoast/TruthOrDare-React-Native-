@@ -1,7 +1,7 @@
-import friends from "./modes/friends.js";
+import party from "./modes/party.js";
 import wild from "./modes/wild.js";
 
 export default {
-  friends,
+  party,
   wild
 };

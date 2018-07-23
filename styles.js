@@ -62,7 +62,7 @@ export default {
   images: {
     bcgPattern: require("./assets/images/bcg_pattern.png"),
     modeParty: require("./assets/images/mode_party.png"),
-    modeRaunchy: require("./assets/images/mode_raunchy.png")
+    modeWild: require("./assets/images/mode_wild.png")
   },
   svg: {
     iconMale: require("./assets/svg/icon_male.svg"),

@@ -80,7 +80,8 @@ const dares = [
 ];
 
 export default {
-  name: "Friends",
+  name: "Friends Party",
+  image: "modeParty",
   truths,
   dares
 };

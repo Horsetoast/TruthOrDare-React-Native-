@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import styles from "../styles";
 import SvgUri from "react-native-svg-uri";
+import CustomButton from "../Components/CustomButton";
 
 export default class PlayersScreen extends React.Component {
   constructor(props) {
@@ -129,24 +130,16 @@ export default class PlayersScreen extends React.Component {
               alignItems: "center"
             }}
           >
-            <TouchableOpacity
-              onPress={this.addPlayer.bind(this)}
-              style={{
-                ...styles.buttonPrimary,
-                flexWrap: "wrap"
-              }}
-            >
-              <Text style={styles.buttonText}>Add Player</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.return.bind(this)}
-              style={{
-                ...styles.buttonSecondary,
-                flexWrap: "wrap"
-              }}
-            >
-              <Text style={styles.buttonText}>Return</Text>
-            </TouchableOpacity>
+            <CustomButton
+              text="Add Player"
+              pressHandler={this.addPlayer.bind(this)}
+              type="primary"
+            />
+            <CustomButton
+              text="Return"
+              pressHandler={this.return.bind(this)}
+              type="secondary"
+            />
           </View>
         </KeyboardAvoidingView>
       </ScrollView>

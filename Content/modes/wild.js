@@ -12,6 +12,7 @@ const dares = [
 
 export default {
   name: "Wild & Raunchy",
+  image: "modeWild",
   truths,
   dares
 };
