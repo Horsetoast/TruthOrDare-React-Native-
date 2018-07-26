@@ -72,18 +72,18 @@ export default class App extends React.Component {
       mode: "friends",
       drawingPlayer: 0,
       players: [
-        {
-          name: "Matus",
-          gender: "M",
-          pickedTruths: [],
-          pickedDares: []
-        },
-        {
-          name: "Jessica",
-          gender: "F",
-          pickedTruths: [],
-          pickedDares: []
-        }
+        // {
+        //   name: "Matus",
+        //   gender: "M",
+        //   pickedTruths: [],
+        //   pickedDares: []
+        // },
+        // {
+        //   name: "Jessica",
+        //   gender: "F",
+        //   pickedTruths: [],
+        //   pickedDares: []
+        // }
       ],
       pickedTruths: [],
       pickedDares: []

@@ -231,13 +231,12 @@ export default class PlayersScreen extends React.Component {
           </View>
         </ScrollView>
         <View>
-          {this.props.screenProps.players.length > 1 ? (
-            <CustomButton
-              text="Start Game"
-              pressHandler={this.startGame.bind(this)}
-              type="primary"
-            />
-          ) : null}
+          <CustomButton
+            text="Start Game"
+            pressHandler={this.startGame.bind(this)}
+            disabled={players.length <= 1}
+            type="primary"
+          />
         </View>
       </View>
     );

@@ -100,6 +100,10 @@ export default class GameModeScreen extends React.Component {
               pressHandler={this.setGameMode.bind(this)}
               mode="wild"
             />
+            <GameModeCard
+              pressHandler={this.setGameMode.bind(this)}
+              mode="college"
+            />
             {/* <TouchableOpacity
               onPress={() => this.setGameMode("wild")}
               style={{

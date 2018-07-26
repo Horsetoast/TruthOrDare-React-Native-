@@ -57,11 +57,20 @@ const styles = StyleSheet.create({
     paddingVertical: button.paddingVertical - 2,
     borderColor: defaults.colors.white
   },
+  disabled: {
+    ...button,
+    backgroundColor: "rgba(255, 255, 255, 0.1)"
+  },
   textInput,
   buttonText: {
     fontFamily: defaults.generic.fontFamily,
     fontSize: defaults.generic.fontSizeMedium,
     color: defaults.colors.white
+  },
+  disabledText: {
+    fontFamily: defaults.generic.fontFamily,
+    fontSize: defaults.generic.fontSizeMedium,
+    color: defaults.colors.primary
   }
 });
 
@@ -69,7 +78,8 @@ const assets = {
   images: {
     bcgPattern: require("./assets/images/bcg_pattern.png"),
     modeParty: require("./assets/images/mode_party.png"),
-    modeWild: require("./assets/images/mode_wild.png")
+    modeWild: require("./assets/images/mode_wild.png"),
+    modeCollege: require("./assets/images/mode_college.png")
   },
   svg: {
     iconMale: require("./assets/svg/icon_male.svg"),

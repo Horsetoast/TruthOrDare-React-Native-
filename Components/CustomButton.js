@@ -1,5 +1,10 @@
 import React from "react";
-import { Text, TouchableOpacity, TouchableHighlight } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback
+} from "react-native";
 import { defaults, assets, styles } from "../styles";
 
 const buttonStyles = {
@@ -9,9 +14,23 @@ const buttonStyles = {
 };
 
 export default props => {
-  const type = props.touchableType || "opacity";
+  const touchableType = props.touchableType || "opacity";
   const style = styles[buttonStyles[props.type]];
-  if (type === "highlight") {
+
+  if (props.disabled) {
+    return (
+      <TouchableHighlight
+        style={[
+          styles["disabled"],
+          {
+            alignSelf: props.fullwidth ? "stretch" : "auto"
+          }
+        ]}
+      >
+        <Text style={styles.disabledText}> {props.text} </Text>
+      </TouchableHighlight>
+    );
+  } else if (touchableType === "highlight") {
     return (
       <TouchableHighlight
         onPress={props.pressHandler}
