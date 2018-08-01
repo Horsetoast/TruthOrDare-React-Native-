@@ -1,5 +1,11 @@
 import { StyleSheet } from "react-native";
 
+import iconMale from "./assets/svg/icon_male.svg";
+import iconFemale from "./assets/svg/icon_female.svg";
+import iconTimes from "./assets/svg/icon_times.svg";
+import iconMenu from "./assets/svg/icon_menu.svg";
+import iconArrowLeft from "./assets/svg/icon_arrow_left.svg";
+
 const defaults = {
   colors: {
     primary: "#4b0095",
@@ -82,11 +88,11 @@ const assets = {
     modeCollege: require("./assets/images/mode_college.png")
   },
   svg: {
-    iconMale: require("./assets/svg/icon_male.svg"),
-    iconFemale: require("./assets/svg/icon_female.svg"),
-    iconTimes: require("./assets/svg/icon_times.svg"),
-    iconMenu: require("./assets/svg/icon_menu.svg"),
-    iconArrowLeft: require("./assets/svg/icon_arrow_left.svg")
+    iconMale,
+    iconFemale,
+    iconTimes,
+    iconMenu,
+    iconArrowLeft
   }
 };
 

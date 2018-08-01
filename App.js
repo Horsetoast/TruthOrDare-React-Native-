@@ -6,9 +6,10 @@ import AddPlayerScreen from "./Screens/AddPlayerScreen";
 import GameModeScreen from "./Screens/GameModeScreen";
 import DrawScreen from "./Screens/DrawScreen";
 // import cacheAssetsAsync from "./cachedAssetsAsync";
-import styles from "./styles";
+// import styles from "./styles";
 import { StackNavigator } from "react-navigation";
 import { Animated, Easing } from "react-native";
+import SplashScreen from 'react-native-splash-screen';
 
 // Disable yellow warnings
 console.disableYellowBox = true;
@@ -72,18 +73,18 @@ export default class App extends React.Component {
       mode: "friends",
       drawingPlayer: 0,
       players: [
-        // {
-        //   name: "Matus",
-        //   gender: "M",
-        //   pickedTruths: [],
-        //   pickedDares: []
-        // },
-        // {
-        //   name: "Jessica",
-        //   gender: "F",
-        //   pickedTruths: [],
-        //   pickedDares: []
-        // }
+        {
+          name: "Matus",
+          gender: "M",
+          pickedTruths: [],
+          pickedDares: []
+        },
+        {
+          name: "Jessica",
+          gender: "F",
+          pickedTruths: [],
+          pickedDares: []
+        }
       ],
       pickedTruths: [],
       pickedDares: []
@@ -92,8 +93,13 @@ export default class App extends React.Component {
 
   async _loadAssetsAsync() {
     try {
-      // styles.images.forEach(img => {
-      // })
+      // Font.loadAsync({
+      //   "titilium-regular": require("./assets/fonts/TitilliumWeb-Regular.ttf")
+      // }).then(() => {
+      //   this.setState({
+      //     fontLoaded: true
+      //   });
+      // });
     } catch (e) {
       console.log({
         e
@@ -103,23 +109,14 @@ export default class App extends React.Component {
         fontLoaded: true,
         appIsReady: true
       });
+      setTimeout(() => {
+        SplashScreen.hide();    
+      }, 300);
     }
   }
 
   componentDidMount() {
     this._loadAssetsAsync();
-    // Font.loadAsync({
-    //   "titilium-regular": require("./assets/fonts/TitilliumWeb-Regular.ttf")
-    // }).then(() => {
-    //   this.setState({
-    //     fontLoaded: true
-    //   });
-    // });
-
-    // this.setState({
-    //   fontLoaded: true,
-    //   appIsReady: true
-    // });
   }
 
   commit(action, payload, cb = null) {

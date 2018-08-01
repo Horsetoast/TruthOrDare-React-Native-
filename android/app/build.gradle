@@ -86,7 +86,7 @@ apply from: "../../node_modules/react-native/react.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = false
+def enableSeparateBuildPerCPUArchitecture = true
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -107,6 +107,16 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            if (project.hasProperty('TOD_RELEASE_STORE_FILE')) {
+                storeFile file(TOD_RELEASE_STORE_FILE)
+                storePassword TOD_RELEASE_STORE_PASSWORD
+                keyAlias TOD_RELEASE_KEY_ALIAS
+                keyPassword TOD_RELEASE_KEY_PASSWORD
+            }
+        }
+    }    
     splits {
         abi {
             reset()
@@ -119,6 +129,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -137,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-splash-screen')
     compile project(':react-native-svg')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

@@ -1112,6 +1112,10 @@ babel-plugin-transform-strict-mode@^6.24.1:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
 
+babel-plugin-transform-svg-import-to-string@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-svg-import-to-string/-/babel-plugin-transform-svg-import-to-string-0.0.1.tgz#1190e1aca54d3fa65647d204f362578eab755acc"
+
 babel-preset-es2015-node@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/babel-preset-es2015-node/-/babel-preset-es2015-node-6.1.1.tgz#60b23157024b0cfebf3a63554cb05ee035b4e55f"
@@ -4219,6 +4223,10 @@ react-native-safe-area-view@^0.8.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.8.0.tgz#22d78cb8e8658d04a10cd53c1546e0bc86cb7aea"
   dependencies:
     hoist-non-react-statics "^2.3.1"
+
+react-native-splash-screen@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.1.0.tgz#9636f83d711dadded27167cdc3dc6aa98ec222ee"
 
 react-native-svg-uri@^1.2.3:
   version "1.2.3"

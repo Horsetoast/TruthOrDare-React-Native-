@@ -2,7 +2,7 @@
   "eslint.autoFixOnSave": false,
   "eslint.packageManager": "yarn",
   "eslint.enable": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "javascript.format.enable": false,
   "prettier.eslintIntegration": true,
   "files.associations": {

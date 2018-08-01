@@ -59,87 +59,95 @@ export default class PlayersScreen extends React.Component {
         <KeyboardAvoidingView
           style={{
             flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
             backgroundColor: defaults.colors.primary
           }}
           keyboardVerticalOffset={-200}
           behavior="padding"
+          enabled
         >
-          <Text
-            style={{
-              paddingVertical: 20,
-              fontSize: defaults.generic.fontSizeLarge,
-              color: defaults.colors.white,
-              maxWidth: "70%"
-            }}
-          >
-            What's your name?
-          </Text>
-          <TextInput
-            maxLength={30}
-            placeholderTextColor={defaults.colors.primaryLight}
-            underlineColorAndroid="transparent"
-            style={{
-              ...styles.textInput,
-              width: 200,
-              marginBottom: 30
-            }}
-            onChangeText={text => this.setState({ playerName: text })}
-            value={this.state.playerName}
-          />
           <View
             style={{
-              flexDirection: "row",
-              justifyContent: "space-around"
-            }}
-          >
-            <TouchableWithoutFeedback onPress={() => this.setGender("M")}>
-              <View>
-                <SvgUri
-                  width="80"
-                  fill={
-                    this.state.playerGender === "M"
-                      ? defaults.colors.male
-                      : defaults.colors.primaryDark
-                  }
-                  height="80"
-                  source={assets.svg.iconMale}
-                />
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => this.setGender("F")}>
-              <View>
-                <SvgUri
-                  width="80"
-                  fill={
-                    this.state.playerGender === "F"
-                      ? defaults.colors.female
-                      : defaults.colors.primaryDark
-                  }
-                  height="80"
-                  source={assets.svg.iconFemale}
-                />
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-          <View
-            style={{
-              paddingBottom: 100,
-              width: "100%",
+              flex: 1,
+              justifyContent: "center",
               alignItems: "center"
             }}
           >
-            <CustomButton
-              text="Add Player"
-              pressHandler={this.addPlayer.bind(this)}
-              type="primary"
+            <Text
+              style={{
+                paddingVertical: 20,
+                fontSize: defaults.generic.fontSizeLarge,
+                color: defaults.colors.white,
+                maxWidth: "70%"
+              }}
+            >
+              What's your name?
+            </Text>
+            <TextInput
+              maxLength={30}
+              placeholderTextColor={defaults.colors.primaryLight}
+              underlineColorAndroid="transparent"
+              style={{
+                ...styles.textInput,
+                width: 200,
+                marginBottom: 30
+              }}
+              onChangeText={text => this.setState({ playerName: text })}
+              value={this.state.playerName}
             />
-            <CustomButton
-              text="Return"
-              pressHandler={this.return.bind(this)}
-              type="secondary"
-            />
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around"
+              }}
+            >
+              <TouchableWithoutFeedback onPress={() => this.setGender("M")}>
+                <View>
+                  <SvgUri
+                    width="80"
+                    fill={
+                      this.state.playerGender === "M"
+                        ? defaults.colors.male
+                        : defaults.colors.primaryDark
+                    }
+                    height="80"
+                    svgXmlData={assets.svg.iconMale}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={() => this.setGender("F")}>
+                <View>
+                  <SvgUri
+                    width="80"
+                    fill={
+                      this.state.playerGender === "F"
+                        ? defaults.colors.female
+                        : defaults.colors.primaryDark
+                    }
+                    height="80"
+                    svgXmlData={assets.svg.iconFemale}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+            <View
+              style={{
+                paddingBottom: 100,
+                width: "100%",
+                alignItems: "center"
+              }}
+            >
+              <CustomButton
+                text="Add Player"
+                pressHandler={this.addPlayer.bind(this)}
+                disabled={this.state.playerName.length === 0}
+                type="primary"
+              />
+              <CustomButton
+                text="Return"
+                pressHandler={this.return.bind(this)}
+                type="secondary"
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </ScrollView>

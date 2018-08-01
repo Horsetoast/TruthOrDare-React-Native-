@@ -1,3 +1,4 @@
 {
-  "presets": ["react-native"]
+  "presets": ["react-native"],
+  "plugins": ["./node_modules/babel-plugin-transform-svg-import-to-string"]
 }

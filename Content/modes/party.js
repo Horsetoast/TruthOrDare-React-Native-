@@ -62,71 +62,71 @@ const truths = [
 ];
 
 const dares = [
-  {
-    dare: "Sing the alphabet without moving your mouth."
-  },
-  {
-    dare: "Do your best president impression."
-  },
-  {
-    dare: "Act like a dog and get petted by everyone."
-  },
-  {
-    dare: "Show everyone the most unflattering picture of you."
-  },
-  {
-    dare:
-      "Call a pizza place and ask if they use cruelty-free wheat in their dough."
-  },
-  {
-    dare: "Sing instead of speaking for until it's your turn again."
-  },
-  {
-    dare: "Stuff an ice cube inside your clothes."
-  },
-  {
-    dare: "Use an item you find in the fridge as lotion on your face."
-  },
-  {
-    dare: "Twerk to a song of your choice."
-  },
-  {
-    dare: "Silently do the macarena."
-  },
-  {
-    dare:
-      "Call a tattoo shop and ask if they can tattoo 30 teardrops on your face."
-  },
+  // {
+  //   dare: "Sing the alphabet without moving your mouth."
+  // },
+  // {
+  //   dare: "Do your best president impression."
+  // },
+  // {
+  //   dare: "Act like a dog and get petted by everyone."
+  // },
+  // {
+  //   dare: "Show everyone the most unflattering picture of you."
+  // },
+  // {
+  //   dare:
+  //     "Call a pizza place and ask if they use cruelty-free wheat in their dough."
+  // },
+  // {
+  //   dare: "Sing instead of speaking for until it's your turn again."
+  // },
+  // {
+  //   dare: "Stuff an ice cube inside your clothes."
+  // },
+  // {
+  //   dare: "Use an item you find in the fridge as lotion on your face."
+  // },
+  // {
+  //   dare: "Twerk to a song of your choice."
+  // },
+  // {
+  //   dare: "Silently do the macarena."
+  // },
+  // {
+  //   dare:
+  //     "Call a tattoo shop and ask if they can tattoo 30 teardrops on your face."
+  // },
   {
     dare: "Kiss {player} on their cheek."
-  },
-  {
-    dare: "Start belly dancing in a circle of players."
-  },
-  {
-    dare: "Wear your shirt inside out."
-  },
-  {
-    dare: "Compliment {player} on at least two aspects."
-  },
-  {
-    dare: "Massage your friend’s feet."
-  },
-  {
-    dare: "Get slapped by {player}."
-  },
-  {
-    dare: "Pretend you’re having an orgasmic moment and start acting it out."
-  },
-  {
-    dare: "Imitate a chicken and a horse at the same time."
-  },
-  {
-    dare: "Speak the rest of the game in a foreign accent."
-  },
-  {
-    dare: "Write your name in the air with your ass."
   }
+  // {
+  //   dare: "Start belly dancing in a circle of players."
+  // },
+  // {
+  //   dare: "Wear your shirt inside out."
+  // },
+  // {
+  //   dare: "Compliment {player} on at least two aspects."
+  // },
+  // {
+  //   dare: "Massage your friend’s feet."
+  // },
+  // {
+  //   dare: "Get slapped by {player}."
+  // },
+  // {
+  //   dare: "Pretend you’re having an orgasmic moment and start acting it out."
+  // },
+  // {
+  //   dare: "Imitate a chicken and a horse at the same time."
+  // },
+  // {
+  //   dare: "Speak the rest of the game in a foreign accent."
+  // },
+  // {
+  //   dare: "Write your name in the air with your ass."
+  // }
 ];
 
 export default {

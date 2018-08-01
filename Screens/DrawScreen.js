@@ -17,7 +17,7 @@ export default class PlayersScreen extends React.Component {
     this.state = {
       endGamePrompt: false,
       playerHeaderState: "waiting",
-      fadeText: false,
+      randomPlayer: null,
       truth: null,
       dare: null,
       drawn: false
@@ -52,15 +52,16 @@ export default class PlayersScreen extends React.Component {
   }
 
   _replacePlayerName(text) {
-    const players = this.props.screenProps.players;
-    const randomIndex = Math.floor(Math.random() * players.length);
-    const randomPlayer = players[randomIndex];
+    const currentPlayer = this.props.screenProps.player;    
+    console.log('Current players', currentPlayer);
+    const { randomPlayer } = this.state;
     /* Split but keep delimeter in array */
     const replaced = text.split(/(\{.*\})/g);
-    return replaced.map(item => {
+    return replaced.map((item, i) => {
       if (item === "{player}") {
         return (
           <Text
+            key={i}
             style={{
               color:
                 randomPlayer.gender === "M"
@@ -78,11 +79,16 @@ export default class PlayersScreen extends React.Component {
   }
 
   _drawUpdate(type, payload) {
+    const players = this.props.screenProps.players;
+    const randomIndex = Math.floor(Math.random() * players.length);
+    const randomPlayer = players[randomIndex];
+
     this.setState(
       {
         [type]: payload,
         drawn: true,
-        playerHeaderState: "drawn"
+        playerHeaderState: "drawn",
+        randomPlayer
       },
       () => {
         this._resultCard.animateCardIn(() => {
@@ -185,9 +191,9 @@ export default class PlayersScreen extends React.Component {
   }
 
   showDrawOptions() {
-    const player = this.props.screenProps.players[
-      this.props.screenProps.drawingPlayer
-    ];
+    // const player = this.props.screenProps.players[
+    //   this.props.screenProps.drawingPlayer
+    // ];
 
     return (
       <View>
@@ -209,9 +215,10 @@ export default class PlayersScreen extends React.Component {
 
   showDrawnResult() {
     const result = this.getResult();
-    const player = this.props.screenProps.players[
-      this.props.screenProps.drawingPlayer
-    ];
+    // const player = this.props.screenProps.players[
+    //   this.props.screenProps.drawingPlayer
+    // ];
+    console.log("RENDER", this.props);
 
     return (
       <View
@@ -263,6 +270,11 @@ export default class PlayersScreen extends React.Component {
   }
 
   render() {
+    console.log(
+      "RENDER?",
+      JSON.stringify(this.state)
+      // JSON.stringify(this.props)
+    );
     const player = this.props.screenProps.players[
       this.props.screenProps.drawingPlayer
     ];
@@ -311,7 +323,7 @@ export default class PlayersScreen extends React.Component {
             width="10"
             height="10"
             fill="#ffffff"
-            source={assets.svg.iconTimes}
+            svgXmlData={assets.svg.iconTimes}
           />
         </TouchableOpacity>
         <Image

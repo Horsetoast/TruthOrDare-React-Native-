@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import GameModeCard from "../Components/GameModeCard";
 import { defaults, assets, styles } from "../styles";
+
 // import SvgUri from "react-native-svg-uri";
 
 export default class GameModeScreen extends React.Component {
@@ -47,15 +48,6 @@ export default class GameModeScreen extends React.Component {
           }}
         >
           <View>
-            {/* <Text
-              style={{
-                fontSize: styles.generic.fontSizeSmall,
-                color: styles.colors.primaryLight,
-                fontFamily: styles.generic.fontFamily
-              }}
-            >
-              Game mode
-            </Text> */}
             <Text
               style={{
                 fontSize: defaults.generic.fontSizeMedium,
@@ -81,15 +73,15 @@ export default class GameModeScreen extends React.Component {
         </Text> */}
         <ScrollView
           style={{
-            padding: 20,
-            paddingTop: 50,
             width: "100%",
             backgroundColor: defaults.colors.primaryDark
           }}
         >
           <View
             style={{
-              flex: 1
+              flex: 1,
+              padding: 20,
+              paddingTop: 50
             }}
           >
             <GameModeCard
@@ -104,27 +96,6 @@ export default class GameModeScreen extends React.Component {
               pressHandler={this.setGameMode.bind(this)}
               mode="college"
             />
-            {/* <TouchableOpacity
-              onPress={() => this.setGameMode("wild")}
-              style={{
-                backgroundColor: styles.colors.primary,
-                flex: 1,
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.3,
-                shadowRadius: 4,
-                elevation: 4,
-                height: 160
-              }}
-            >
-              <Image
-                source={styles.images.modeRaunchy}
-                style={{
-                  width: "100%",
-                  height: "100%"
-                }}
-              />
-              <Text>Wild & Raunchy</Text>
-            </TouchableOpacity> */}
           </View>
         </ScrollView>
       </View>

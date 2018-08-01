@@ -124,7 +124,7 @@ export default class PlayersScreen extends React.Component {
               width="15"
               height="15"
               fill={defaults.colors.white}
-              source={assets.svg.iconArrowLeft}
+              svgXmlData={assets.svg.iconArrowLeft}
             />
           </TouchableOpacity>
         </View>
@@ -176,14 +176,14 @@ export default class PlayersScreen extends React.Component {
                         width="20"
                         fill={defaults.colors.male}
                         height="20"
-                        source={assets.svg.iconMale}
+                        svgXmlData={assets.svg.iconMale}
                       />
                     ) : (
                       <SvgUri
                         width="20"
                         fill={defaults.colors.female}
                         height="20"
-                        source={assets.svg.iconFemale}
+                        svgXmlData={assets.svg.iconFemale}
                       />
                     )}
                   </View>
@@ -216,7 +216,7 @@ export default class PlayersScreen extends React.Component {
                       width="10"
                       height="10"
                       fill="#ffffff"
-                      source={assets.svg.iconTimes}
+                      svgXmlData={assets.svg.iconTimes}
                     />
                   </TouchableOpacity>
                 </View>
