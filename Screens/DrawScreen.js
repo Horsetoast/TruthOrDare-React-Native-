@@ -51,9 +51,7 @@ export default class PlayersScreen extends React.Component {
     });
   }
 
-  _replacePlayerName(text) {
-    const currentPlayer = this.props.screenProps.player;    
-    console.log('Current players', currentPlayer);
+  _replacePlayerName(text) { 
     const { randomPlayer } = this.state;
     /* Split but keep delimeter in array */
     const replaced = text.split(/(\{.*\})/g);
@@ -79,7 +77,9 @@ export default class PlayersScreen extends React.Component {
   }
 
   _drawUpdate(type, payload) {
-    const players = this.props.screenProps.players;
+    const drawingPlayer = this.props.screenProps.drawingPlayer;   
+    const players = this.props.screenProps.players.slice();
+    players.splice(drawingPlayer, 1);
     const randomIndex = Math.floor(Math.random() * players.length);
     const randomPlayer = players[randomIndex];
 
