@@ -1,4 +1,4 @@
-package com.truthordare;
+package com.horsetoast.truthordare;
 
 import android.app.Application;
 
