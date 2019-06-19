@@ -74,14 +74,8 @@ export default class App extends React.Component {
       drawingPlayer: 0,
       players: [
         {
-          name: "Matus",
+          name: "Jack",
           gender: "M",
-          pickedTruths: [],
-          pickedDares: []
-        },
-        {
-          name: "Jessica",
-          gender: "F",
           pickedTruths: [],
           pickedDares: []
         }
